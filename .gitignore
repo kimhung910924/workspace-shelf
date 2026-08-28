@@ -1,0 +1,17 @@
+# Xcode and Swift Package Manager
+.build/
+.swiftpm/
+DerivedData/
+build/
+*.xcuserstate
+xcuserdata/
+
+# macOS
+.DS_Store
+
+# Local app and test data
+local/
+tmp/
+logs/
+TestData/
+
