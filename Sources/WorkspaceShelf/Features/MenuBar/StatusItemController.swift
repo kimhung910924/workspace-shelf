@@ -67,7 +67,7 @@ final class StatusItemController {
     private func makeContextMenu() -> NSMenu {
         let menu = NSMenu()
         let openItem = NSMenuItem(
-            title: "Workspace Shelf 열기",
+            title: L10n.t("Workspace Shelf 열기", "Open Workspace Shelf"),
             action: #selector(openShelf),
             keyEquivalent: ""
         )
@@ -75,7 +75,7 @@ final class StatusItemController {
         menu.addItem(openItem)
 
         let addItem = NSMenuItem(
-            title: "폴더 추가…",
+            title: L10n.t("폴더 추가…", "Add Folder…"),
             action: #selector(addWorkspace),
             keyEquivalent: ""
         )
@@ -84,7 +84,7 @@ final class StatusItemController {
         menu.addItem(.separator())
 
         let shortcutItem = NSMenuItem(
-            title: "단축키: ⌥ Space",
+            title: L10n.t("단축키: ⌥ Space", "Shortcut: ⌥ Space"),
             action: nil,
             keyEquivalent: ""
         )
@@ -103,7 +103,7 @@ final class StatusItemController {
             dragMenu.addItem(item)
         }
         let dragItem = NSMenuItem(
-            title: "다른 앱으로 드래그할 때",
+            title: L10n.t("다른 앱으로 드래그할 때", "When Dragging to Other Apps"),
             action: nil,
             keyEquivalent: ""
         )
@@ -112,7 +112,7 @@ final class StatusItemController {
         menu.addItem(.separator())
 
         let updateItem = NSMenuItem(
-            title: "업데이트 확인…",
+            title: L10n.t("업데이트 확인…", "Check for Updates…"),
             action: #selector(checkForUpdates),
             keyEquivalent: ""
         )
@@ -121,7 +121,7 @@ final class StatusItemController {
         menu.addItem(.separator())
 
         let quitItem = NSMenuItem(
-            title: "Workspace Shelf 종료",
+            title: L10n.t("Workspace Shelf 종료", "Quit Workspace Shelf"),
             action: #selector(quit),
             keyEquivalent: "q"
         )

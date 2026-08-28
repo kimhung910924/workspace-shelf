@@ -10,9 +10,9 @@ final class GlobalHotKey {
         var errorDescription: String? {
             switch self {
             case .handlerInstallation(let status):
-                "단축키 이벤트 처리기를 만들지 못했습니다. 코드: \(status)"
+                L10n.t("단축키 이벤트 처리기를 만들지 못했습니다. 코드: \(status)", "Couldn't install the hot key event handler. Code: \(status)")
             case .registration(let status):
-                "Option + Space 단축키를 등록하지 못했습니다. 다른 앱에서 사용 중일 수 있습니다. 코드: \(status)"
+                L10n.t("Option + Space 단축키를 등록하지 못했습니다. 다른 앱에서 사용 중일 수 있습니다. 코드: \(status)", "Couldn't register the Option + Space shortcut. Another app may be using it. Code: \(status)")
             }
         }
     }

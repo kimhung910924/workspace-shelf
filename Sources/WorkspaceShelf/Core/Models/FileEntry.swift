@@ -17,13 +17,13 @@ struct FileEntry: Identifiable, Hashable, Sendable {
 
     var typeDescription: String {
         if isPackage {
-            return "패키지"
+            return L10n.t("패키지", "Package")
         }
         if isDirectory {
-            return "폴더"
+            return L10n.t("폴더", "Folder")
         }
         let extensionName = url.pathExtension
-        return extensionName.isEmpty ? "파일" : extensionName.uppercased()
+        return extensionName.isEmpty ? L10n.t("파일", "File") : extensionName.uppercased()
     }
 }
 
@@ -35,10 +35,10 @@ enum FileSortOption: String, CaseIterable, Codable, Sendable {
 
     var title: String {
         switch self {
-        case .name: "이름"
-        case .modificationDate: "수정일"
-        case .type: "종류"
-        case .size: "크기"
+        case .name: L10n.t("이름", "Name")
+        case .modificationDate: L10n.t("수정일", "Date Modified")
+        case .type: L10n.t("종류", "Kind")
+        case .size: L10n.t("크기", "Size")
         }
     }
 }
@@ -76,9 +76,9 @@ enum BrowserViewMode: String, CaseIterable, Codable, Sendable {
 
     var label: String {
         switch self {
-        case .list: "목록 보기"
-        case .column: "컬럼 보기"
-        case .grid: "아이콘 보기"
+        case .list: L10n.t("목록 보기", "List View")
+        case .column: L10n.t("컬럼 보기", "Column View")
+        case .grid: L10n.t("아이콘 보기", "Icon View")
         }
     }
 }

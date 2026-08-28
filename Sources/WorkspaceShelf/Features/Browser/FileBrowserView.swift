@@ -131,24 +131,24 @@ struct FileBrowserView: View {
                 content()
             case .folderIsEmpty:
                 ContentUnavailableView(
-                    "이 폴더는 비어 있습니다",
+                    L10n.t("이 폴더는 비어 있습니다", "This folder is empty"),
                     systemImage: "folder",
-                    description: Text("새로고침하거나 다른 폴더를 선택하세요.")
+                    description: Text(L10n.t("새로고침하거나 다른 폴더를 선택하세요.", "Refresh, or choose another folder."))
                 )
             case .searchFoundNothing(let query):
                 ContentUnavailableView {
-                    Label("일치하는 항목이 없습니다", systemImage: "magnifyingglass")
+                    Label(L10n.t("일치하는 항목이 없습니다", "No matching items"), systemImage: "magnifyingglass")
                 } description: {
-                    Text("이 폴더에 \"\(query)\"이(가) 이름에 들어간 항목이 없습니다.")
+                    Text(L10n.t("이 폴더에 \"\(query)\"이(가) 이름에 들어간 항목이 없습니다.", "Nothing in this folder has \"\(query)\" in its name."))
                 } actions: {
-                    Button("검색어 지우기") {
+                    Button(L10n.t("검색어 지우기", "Clear Search")) {
                         model.searchQuery = ""
                     }
                 }
             }
 
             if model.isLoading {
-                ProgressView("폴더 불러오는 중")
+                ProgressView(L10n.t("폴더 불러오는 중", "Loading Folder"))
                     .padding(16)
                     .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
             }
@@ -182,11 +182,11 @@ struct FileBrowserView: View {
 
     private var header: some View {
         HStack(spacing: 12) {
-            Text("이름")
+            Text(L10n.t("이름", "Name"))
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text("수정일")
+            Text(L10n.t("수정일", "Date Modified"))
                 .frame(width: 142, alignment: .leading)
-            Text("크기")
+            Text(L10n.t("크기", "Size"))
                 .frame(width: 76, alignment: .trailing)
         }
         .font(.caption)
@@ -197,23 +197,23 @@ struct FileBrowserView: View {
 
     private var addWorkspaceEmptyState: some View {
         ContentUnavailableView {
-            Label("자주 쓰는 폴더를 추가하세요", systemImage: "folder.badge.plus")
+            Label(L10n.t("자주 쓰는 폴더를 추가하세요", "Add your frequently used folders"), systemImage: "folder.badge.plus")
         } description: {
-            Text("폴더는 이동하거나 복사하지 않고 빠른 접근 경로만 저장합니다.")
+            Text(L10n.t("폴더는 이동하거나 복사하지 않고 빠른 접근 경로만 저장합니다.", "Folders aren't moved or copied; only a quick-access path is saved."))
         } actions: {
-            Button("폴더 추가", action: model.addWorkspace)
+            Button(L10n.t("폴더 추가", "Add Folder"), action: model.addWorkspace)
                 .buttonStyle(.borderedProminent)
         }
     }
 
     private var unavailableState: some View {
         ContentUnavailableView {
-            Label("폴더에 접근할 수 없습니다", systemImage: "exclamationmark.triangle")
+            Label(L10n.t("폴더에 접근할 수 없습니다", "Can't access this folder"), systemImage: "exclamationmark.triangle")
         } description: {
-            Text(model.selectedWorkspace?.errorDescription ?? "Finder에서 폴더 위치와 권한을 확인하세요.")
+            Text(model.selectedWorkspace?.errorDescription ?? L10n.t("Finder에서 폴더 위치와 권한을 확인하세요.", "Check the folder's location and permissions in Finder."))
         } actions: {
             if let workspace = model.selectedWorkspace {
-                Button("목록에서 제거", role: .destructive) {
+                Button(L10n.t("목록에서 제거", "Remove from List"), role: .destructive) {
                     model.removeWorkspace(workspace.id)
                 }
             }
@@ -239,16 +239,16 @@ struct FileRowActions {
 
 @ViewBuilder
 func fileContextMenuItems(for entry: FileEntry, actions: FileRowActions) -> some View {
-    Button(entry.canNavigate ? "폴더 열기" : "열기", action: actions.activate)
-    Button("Finder에서 보기", action: actions.reveal)
-    Button("Terminal에서 열기", action: actions.terminal)
+    Button(entry.canNavigate ? L10n.t("폴더 열기", "Open Folder") : L10n.t("열기", "Open"), action: actions.activate)
+    Button(L10n.t("Finder에서 보기", "Reveal in Finder"), action: actions.reveal)
+    Button(L10n.t("Terminal에서 열기", "Open in Terminal"), action: actions.terminal)
     Divider()
-    Button("이름 변경…", action: actions.rename)
-    Button("복사", action: actions.copy)
-    Button("휴지통으로 이동…", role: .destructive, action: actions.trash)
+    Button(L10n.t("이름 변경…", "Rename…"), action: actions.rename)
+    Button(L10n.t("복사", "Copy"), action: actions.copy)
+    Button(L10n.t("휴지통으로 이동…", "Move to Trash…"), role: .destructive, action: actions.trash)
     Divider()
-    Button("경로 복사", action: actions.copyPath)
-    Button("이름 복사", action: actions.copyName)
+    Button(L10n.t("경로 복사", "Copy Path"), action: actions.copyPath)
+    Button(L10n.t("이름 복사", "Copy Name"), action: actions.copyName)
 }
 
 /// Icons are looked up from Launch Services, which hits disk — with several
@@ -388,7 +388,7 @@ private struct FileListRow: View {
                     .lineLimit(1)
                     .truncationMode(.middle)
                 if entry.isSymbolicLink {
-                    Text("별칭 또는 심볼릭 링크")
+                    Text(L10n.t("별칭 또는 심볼릭 링크", "Alias or symbolic link"))
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                 }

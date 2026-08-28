@@ -16,15 +16,15 @@ enum FileOperationService {
         var errorDescription: String? {
             switch self {
             case .emptyName:
-                "이름을 입력하세요."
+                L10n.t("이름을 입력하세요.", "Enter a name.")
             case .reservedName:
-                "이 이름은 사용할 수 없습니다."
+                L10n.t("이 이름은 사용할 수 없습니다.", "This name can't be used.")
             case .invalidCharacter:
-                "이름에는 / 또는 :를 사용할 수 없습니다."
+                L10n.t("이름에는 / 또는 :를 사용할 수 없습니다.", "Names can't contain / or :.")
             case .alreadyExists(let name):
-                "같은 위치에 \(name)이(가) 이미 있습니다."
+                L10n.t("같은 위치에 \(name)이(가) 이미 있습니다.", "\"\(name)\" already exists in this location.")
             case .cannotMoveIntoDescendant:
-                "폴더를 자기 자신 또는 하위 폴더 안으로 이동할 수 없습니다."
+                L10n.t("폴더를 자기 자신 또는 하위 폴더 안으로 이동할 수 없습니다.", "A folder can't be moved into itself or one of its subfolders.")
             }
         }
     }

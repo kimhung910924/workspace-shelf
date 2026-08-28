@@ -246,17 +246,17 @@ final class AppModel: ObservableObject {
 
     var trashTargetName: String {
         switch trashTargets.count {
-        case 0: "선택한 항목"
+        case 0: L10n.t("선택한 항목", "the selected items")
         case 1: trashTargets[0].name
-        default: "\(trashTargets.count)개 항목"
+        default: L10n.t("\(trashTargets.count)개 항목", "\(trashTargets.count) items")
         }
     }
 
     func addWorkspace() {
         let panel = NSOpenPanel()
-        panel.title = "Workspace로 사용할 폴더 선택"
-        panel.message = "폴더는 이동하지 않으며 빠른 접근 권한만 저장합니다."
-        panel.prompt = "폴더 추가"
+        panel.title = L10n.t("Workspace로 사용할 폴더 선택", "Choose a Folder to Use as a Workspace")
+        panel.message = L10n.t("폴더는 이동하지 않으며 빠른 접근 권한만 저장합니다.", "The folder isn't moved; only quick-access permission is saved.")
+        panel.prompt = L10n.t("폴더 추가", "Add Folder")
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = false
@@ -297,7 +297,7 @@ final class AppModel: ObservableObject {
             try persistWorkspaces()
             selectWorkspace(record.id)
         } catch {
-            errorMessage = "폴더를 등록하지 못했습니다. \(error.localizedDescription)"
+            errorMessage = L10n.t("폴더를 등록하지 못했습니다. \(error.localizedDescription)", "Couldn't add the folder. \(error.localizedDescription)")
         }
     }
 
@@ -308,7 +308,7 @@ final class AppModel: ObservableObject {
             (try? $0.resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory == true
         }
         guard !folders.isEmpty else {
-            errorMessage = "폴더만 Workspace로 추가할 수 있습니다."
+            errorMessage = L10n.t("폴더만 Workspace로 추가할 수 있습니다.", "Only folders can be added as Workspaces.")
             return
         }
         for folder in folders {
@@ -323,7 +323,7 @@ final class AppModel: ObservableObject {
         do {
             try persistWorkspaces()
         } catch {
-            errorMessage = "Workspace 순서를 저장하지 못했습니다. \(error.localizedDescription)"
+            errorMessage = L10n.t("Workspace 순서를 저장하지 못했습니다. \(error.localizedDescription)", "Couldn't save the Workspace order. \(error.localizedDescription)")
         }
     }
 
@@ -355,7 +355,7 @@ final class AppModel: ObservableObject {
         do {
             try persistWorkspaces()
         } catch {
-            errorMessage = "Workspace 목록을 저장하지 못했습니다. \(error.localizedDescription)"
+            errorMessage = L10n.t("Workspace 목록을 저장하지 못했습니다. \(error.localizedDescription)", "Couldn't save the Workspace list. \(error.localizedDescription)")
         }
     }
 
@@ -372,7 +372,7 @@ final class AppModel: ObservableObject {
             directoryWatcher?.stop()
             entries = []
             ancestorColumns = []
-            errorMessage = workspace.errorDescription ?? "폴더에 접근할 수 없습니다."
+            errorMessage = workspace.errorDescription ?? L10n.t("폴더에 접근할 수 없습니다.", "Can't access the folder.")
             return
         }
         loadDirectory(rootURL)
@@ -382,14 +382,14 @@ final class AppModel: ObservableObject {
         if entry.canNavigate {
             navigateInto(entry.url)
         } else if !FileSystemService.open(entry.url) {
-            errorMessage = "기본 앱에서 \(entry.name)을(를) 열지 못했습니다."
+            errorMessage = L10n.t("기본 앱에서 \(entry.name)을(를) 열지 못했습니다.", "Couldn't open \(entry.name) in its default app.")
         }
     }
 
     func navigateInto(_ url: URL) {
         guard let rootURL = workspaceRootURL else { return }
         guard WorkspacePathPolicy.contains(url, within: rootURL) else {
-            errorMessage = "등록한 Workspace 밖으로 이동할 수 없습니다."
+            errorMessage = L10n.t("등록한 Workspace 밖으로 이동할 수 없습니다.", "Can't navigate outside the registered Workspaces.")
             return
         }
 
@@ -449,7 +449,7 @@ final class AppModel: ObservableObject {
     func copySelectedFile() {
         let targets = selectedEntries
         guard !targets.isEmpty else {
-            errorMessage = "복사할 파일 또는 폴더를 먼저 선택하세요."
+            errorMessage = L10n.t("복사할 파일 또는 폴더를 먼저 선택하세요.", "Select a file or folder to copy first.")
             return
         }
         FileSystemService.copyFileURLsToPasteboard(targets.map(\.url))
@@ -459,7 +459,7 @@ final class AppModel: ObservableObject {
         guard let currentDirectoryURL else { return }
         let sourceURLs = FileSystemService.fileURLsFromPasteboard()
         guard !sourceURLs.isEmpty else {
-            errorMessage = "붙여넣을 파일 또는 폴더가 없습니다."
+            errorMessage = L10n.t("붙여넣을 파일 또는 폴더가 없습니다.", "There's nothing to paste.")
             return
         }
 
@@ -496,7 +496,7 @@ final class AppModel: ObservableObject {
         let requestedName = draftName
         isRenameDialogPresented = false
         renameTarget = nil
-        runFileOperation("이름을 변경하지 못했습니다") {
+        runFileOperation(L10n.t("이름을 변경하지 못했습니다", "Couldn't rename")) {
             FileOperationService.rename(entry.url, to: requestedName)
         }
     }
@@ -507,7 +507,7 @@ final class AppModel: ObservableObject {
 
     func beginNewFolder() {
         guard currentDirectoryURL != nil else { return }
-        draftName = "새 폴더"
+        draftName = L10n.t("새 폴더", "untitled folder")
         isNewFolderDialogPresented = true
     }
 
@@ -515,7 +515,7 @@ final class AppModel: ObservableObject {
         guard let currentDirectoryURL else { return }
         let requestedName = draftName
         isNewFolderDialogPresented = false
-        runFileOperation("새 폴더를 만들지 못했습니다") {
+        runFileOperation(L10n.t("새 폴더를 만들지 못했습니다", "Couldn't create the folder")) {
             FileOperationService.createFolder(named: requestedName, in: currentDirectoryURL)
         }
     }
@@ -532,7 +532,7 @@ final class AppModel: ObservableObject {
     func requestMoveSelectedToTrash() {
         let targets = selectedEntries
         guard !targets.isEmpty else {
-            errorMessage = "휴지통으로 보낼 파일 또는 폴더를 먼저 선택하세요."
+            errorMessage = L10n.t("휴지통으로 보낼 파일 또는 폴더를 먼저 선택하세요.", "Select a file or folder to move to the Trash first.")
             return
         }
         trashTargets = targets
@@ -544,7 +544,7 @@ final class AppModel: ObservableObject {
         let targets = trashTargets
         isTrashConfirmationPresented = false
         trashTargets = []
-        runFileOperation("휴지통으로 이동하지 못했습니다") {
+        runFileOperation(L10n.t("휴지통으로 이동하지 못했습니다", "Couldn't move to the Trash")) {
             for target in targets {
                 let result = FileOperationService.moveToTrash(target.url)
                 if case .failure = result {
@@ -562,12 +562,12 @@ final class AppModel: ObservableObject {
     func selectedFileURLsForPreview() -> [URL] {
         let selected = selectedEntries
         guard !selected.isEmpty else {
-            errorMessage = "미리볼 파일을 먼저 선택하세요."
+            errorMessage = L10n.t("미리볼 파일을 먼저 선택하세요.", "Select a file to preview first.")
             return []
         }
         let files = selected.filter { !$0.isDirectory }
         guard !files.isEmpty else {
-            errorMessage = "폴더가 아닌 파일을 선택한 뒤 Space를 누르세요."
+            errorMessage = L10n.t("폴더가 아닌 파일을 선택한 뒤 Space를 누르세요.", "Select a file (not a folder), then press Space.")
             return []
         }
         return files.map(\.url)
@@ -626,7 +626,7 @@ final class AppModel: ObservableObject {
                 selectWorkspace(first.id)
             }
         } catch {
-            errorMessage = "저장된 Workspace를 불러오지 못했습니다. \(error.localizedDescription)"
+            errorMessage = L10n.t("저장된 Workspace를 불러오지 못했습니다. \(error.localizedDescription)", "Couldn't load the saved Workspaces. \(error.localizedDescription)")
         }
     }
 
@@ -767,7 +767,7 @@ final class AppModel: ObservableObject {
                 )
             case .failure(let message):
                 entries = []
-                errorMessage = "폴더 내용을 불러오지 못했습니다. \(message)"
+                errorMessage = L10n.t("폴더 내용을 불러오지 못했습니다. \(message)", "Couldn't load the folder's contents. \(message)")
             }
         }
     }
@@ -797,7 +797,7 @@ final class AppModel: ObservableObject {
                     }
                 }
             case .failure(let message):
-                errorMessage = (copy ? "복사하지 못했습니다. " : "이동하지 못했습니다. ") + message
+                errorMessage = (copy ? L10n.t("복사하지 못했습니다. ", "Couldn't copy. ") : L10n.t("이동하지 못했습니다. ", "Couldn't move. ")) + message
             }
         }
     }
@@ -879,7 +879,7 @@ final class AppModel: ObservableObject {
 
     private func copyIntoCurrentFolder(_ sourceURLs: [URL], renameConflicts: Bool) {
         guard let currentDirectoryURL else { return }
-        runFileOperation("붙여넣지 못했습니다") {
+        runFileOperation(L10n.t("붙여넣지 못했습니다", "Couldn't paste")) {
             FileOperationService.copy(
                 sourceURLs,
                 to: currentDirectoryURL,

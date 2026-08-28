@@ -12,8 +12,8 @@ enum OutboundDragOperation: String, CaseIterable, Sendable {
 
     var menuTitle: String {
         switch self {
-        case .move: "이동 (Finder와 동일)"
-        case .copy: "복사 (원본 유지)"
+        case .move: L10n.t("이동 (Finder와 동일)", "Move (same as Finder)")
+        case .copy: L10n.t("복사 (원본 유지)", "Copy (keep original)")
         }
     }
 
@@ -21,8 +21,8 @@ enum OutboundDragOperation: String, CaseIterable, Sendable {
     /// naming the current choice.
     var shortTitle: String {
         switch self {
-        case .move: "이동"
-        case .copy: "복사"
+        case .move: L10n.t("이동", "Move")
+        case .copy: L10n.t("복사", "Copy")
         }
     }
 

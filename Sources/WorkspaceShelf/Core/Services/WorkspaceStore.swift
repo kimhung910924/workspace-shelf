@@ -8,7 +8,7 @@ final class WorkspaceStore {
         var errorDescription: String? {
             switch self {
             case .unsupportedVersion(let version):
-                "지원하지 않는 Workspace 저장 형식입니다: \(version)"
+                L10n.t("지원하지 않는 Workspace 저장 형식입니다: \(version)", "Unsupported Workspace storage format: \(version)")
             }
         }
     }

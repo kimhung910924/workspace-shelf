@@ -126,7 +126,7 @@ private struct ColumnView: View {
                     .controlSize(.small)
                     .padding(8)
             } else if entries.isEmpty {
-                Text("비어 있음")
+                Text(L10n.t("비어 있음", "Empty"))
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .padding(8)

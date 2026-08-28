@@ -13,7 +13,7 @@ struct WorkspaceSidebar: View {
                 Image(systemName: "folder.badge.plus")
                     .font(.system(size: 28))
                     .foregroundStyle(.secondary)
-                Text("등록된 폴더가 없습니다")
+                Text(L10n.t("등록된 폴더가 없습니다", "No folders added yet"))
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -32,13 +32,13 @@ struct WorkspaceSidebar: View {
 
             Divider()
             Button(action: model.addWorkspace) {
-                Label("폴더 추가", systemImage: "plus")
+                Label(L10n.t("폴더 추가", "Add Folder"), systemImage: "plus")
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
             .buttonStyle(.plain)
             .padding(.horizontal, 12)
             .padding(.bottom, 10)
-            .help("새 Workspace 폴더 추가")
+            .help(L10n.t("새 Workspace 폴더 추가", "Add a new Workspace folder"))
         }
         .background(Color(nsColor: .controlBackgroundColor).opacity(0.35))
         // Drop a folder anywhere on the sidebar — from Finder or from the
@@ -86,7 +86,7 @@ struct WorkspaceSidebar: View {
             if workspace.url == nil {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .foregroundStyle(.orange)
-                    .accessibilityLabel("접근할 수 없음")
+                    .accessibilityLabel(L10n.t("접근할 수 없음", "Inaccessible"))
             }
         }
         .font(.system(size: 13))
@@ -123,15 +123,15 @@ struct WorkspaceSidebar: View {
         )
         .contextMenu {
             if let url = workspace.url {
-                Button("Finder에서 보기") {
+                Button(L10n.t("Finder에서 보기", "Reveal in Finder")) {
                     model.revealInFinder(url)
                 }
-                Button("Terminal에서 열기") {
+                Button(L10n.t("Terminal에서 열기", "Open in Terminal")) {
                     model.openInTerminal(url)
                 }
                 Divider()
             }
-            Button("목록에서 제거", role: .destructive) {
+            Button(L10n.t("목록에서 제거", "Remove from List"), role: .destructive) {
                 model.removeWorkspace(workspace.id)
             }
         }
