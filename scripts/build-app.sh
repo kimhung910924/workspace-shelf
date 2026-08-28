@@ -62,7 +62,13 @@ install_name_tool -add_rpath "@executable_path/../Frameworks" \
 # "The binary is not signed with a valid Developer ID certificate"로 거절한다
 # (2026-08-28 Sparkle의 Updater.app에서 실제로 겪었다).
 if command -v codesign >/dev/null 2>&1; then
-  sign_identity="${WORKSPACE_SHELF_SIGN_IDENTITY:--}"
+  # ad-hoc(`-`)을 기본값으로 쓰면 안 된다. `--options runtime`(하드닝 런타임)과
+  # ad-hoc 서명이 만나면 dyld 라이브러리 검증이 본체와 Sparkle의 "팀"이 다르다며
+  # 실행 즉시 죽인다 (2026-08-29 실측: "different Team IDs"). Fire의 build.sh처럼
+  # 개발 인증서를 자동으로 찾아 쓰고, 정말 없을 때만 ad-hoc으로 떨어진다.
+  default_identity="$(security find-identity -v -p codesigning 2>/dev/null \
+    | grep -m1 "Apple Development" | sed -E 's/.*\) ([A-F0-9]{40}) .*/\1/' || true)"
+  sign_identity="${WORKSPACE_SHELF_SIGN_IDENTITY:-${default_identity:--}}"
   sparkle="${frameworks_directory}/Sparkle.framework"
   for target in \
     "${sparkle}/Versions/B/XPCServices/Downloader.xpc" \
