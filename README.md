@@ -14,6 +14,8 @@ comes down.
 - Register folders once and open them straight from the shelf
 - Browse inside a registered folder without escaping its root
 - Open files, reveal in Finder, open the folder in Terminal, copy the path
+- Create folders, rename, copy and paste, move to Trash
+- Quick Look with `Space`, filename search in the current folder
 - Drag files out to Finder or any other app
 
 ## Download
@@ -32,9 +34,15 @@ comes down.
 
 ## Scope
 
-This repository holds the Phase 1 working slice, not the finished MVP. What is implemented
-and what is deferred is spelled out in `docs/DEVELOPMENT-PLAN.md`; the implementation
-contract is `docs/PRODUCT-SPEC.md`. The original planning document is
+Everything you reach for day to day works. What is still missing:
+
+- dropping files **into** the shelf (inbound copy)
+- workspace-wide search
+- renaming and reordering workspaces
+- launch at login, window size options
+
+Per-item status is checkboxed in `docs/DEVELOPMENT-PLAN.md`; the implementation contract is
+`docs/PRODUCT-SPEC.md`. The original planning document is
 [WORKSPACE-SHELF-기획서.md](WORKSPACE-SHELF-기획서.md) (Korean).
 
 Registered folders are remembered with security-scoped bookmarks, so access survives

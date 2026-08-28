@@ -12,7 +12,7 @@
 - [x] Swift Package executable
 - [x] test target
 - [x] local `.app` packaging script
-- [ ] Git repository and first commit
+- [x] Git repository and first commit
 - [ ] permanent Xcode app target, signing, and entitlements
 
 Exit:
@@ -123,7 +123,7 @@ workspace. No write operation is approved merely because browsing works.
 - [ ] accessibility pass
 - [ ] performance profiling
 - [ ] 7-day real-use test
-- [ ] signed Release app
+- [x] signed Release app (Developer ID, notarized, dmg — see docs/RELEASING.md)
 
 ## Next recommended implementation pass
 

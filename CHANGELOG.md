@@ -24,7 +24,7 @@
 
 ## [0.1.0]
 
-Phase 1 동작 조각입니다. 구현·보류 범위는 `docs/DEVELOPMENT-PLAN.md`에 있습니다.
+첫 동작본입니다. 항목별 상태는 `docs/DEVELOPMENT-PLAN.md`에 있습니다.
 
 - 노치와 메뉴바 아래 선반에 자주 쓰는 폴더를 놓아둡니다
 - 화면 위쪽 가운데에 마우스를 올리거나 `Option + Space`로 엽니다
