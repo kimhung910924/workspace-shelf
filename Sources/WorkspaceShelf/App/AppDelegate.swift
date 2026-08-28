@@ -38,6 +38,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         self.topEdgeTriggerMonitor = topEdgeTriggerMonitor
         self.quickLookController = quickLookController
 
+        UpdateController.shared.start()
+
         do {
             try globalHotKey.register()
         } catch {

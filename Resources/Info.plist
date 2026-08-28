@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1.0</string>
+	<string>0.1.1</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSMinimumSystemVersion</key>
 	<string>14.0</string>
 	<key>LSUIElement</key>
@@ -28,5 +28,11 @@
 	<true/>
 	<key>NSHumanReadableCopyright</key>
 	<string>Private application</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
+	<key>SUFeedURL</key>
+	<string>https://rrllab.com/apps/workspace-shelf/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>ELp8ctuIKHUUeCj02Gtu3vP3f+fOrMgMDPrvuakMgeI=</string>
 </dict>
 </plist>
