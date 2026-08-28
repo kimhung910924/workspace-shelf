@@ -1,6 +1,7 @@
 # Workspace Shelf
 
 *[한국어](README.ko.md)*
+*[Changelog](CHANGELOG.md)* · *[Releasing](docs/RELEASING.md)*
 
 A tiny macOS app that parks your most-used folders on a shelf that slides down from under
 the notch.
@@ -17,7 +18,7 @@ comes down.
 
 ## Download
 
-**[Get Workspace Shelf 0.1.0 (dmg)](https://github.com/kimhung910924/workspace-shelf/releases/latest)**
+**[Get Workspace Shelf 0.1.1 (dmg)](https://github.com/kimhung910924/workspace-shelf/releases/latest)**
 
 - macOS 14 Sonoma or later
 - Notarized by Apple, so it opens without a Gatekeeper warning

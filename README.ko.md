@@ -1,6 +1,7 @@
 # Workspace Shelf
 
 *[English](README.md)*
+*[변경 이력](CHANGELOG.md)* · *[릴리즈 방법](docs/RELEASING.md)*
 
 노치·메뉴바 아래 떠 있는 선반에 자주 쓰는 폴더를 놓아두는 초경량 macOS 앱.
 
@@ -14,7 +15,7 @@
 
 ## 다운로드
 
-**[Workspace Shelf 0.1.0 내려받기 (dmg)](https://github.com/kimhung910924/workspace-shelf/releases/latest)**
+**[Workspace Shelf 0.1.1 내려받기 (dmg)](https://github.com/kimhung910924/workspace-shelf/releases/latest)**
 
 - macOS 14 Sonoma 이상
 - Apple 공증을 마쳤다. 경고 없이 열린다
