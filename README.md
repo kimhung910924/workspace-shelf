@@ -1,71 +1,78 @@
 # Workspace Shelf
 
-노치·메뉴바 아래 떠 있는 선반에 자주 쓰는 폴더를 놓아두는 초경량 macOS 앱.
+*[한국어](README.ko.md)*
 
-화면 위쪽 가운데로 마우스를 올리거나 `Option + Space`를 누르면 선반이 내려온다.
-앱 1.9MB, 상주 메모리 100MB. Dock 아이콘 없이 메뉴바에만 산다.
+A tiny macOS app that parks your most-used folders on a shelf that slides down from under
+the notch.
 
-- 폴더를 등록해두고 선반에서 바로 연다
-- 등록한 폴더 안을 그 안에서만 돌아다닌다
-- 파일 열기, Finder에서 보기, 터미널에서 폴더 열기, 경로 복사
-- Finder나 다른 앱으로 파일을 끌어다 놓는다
+Move the pointer to the top center of the screen, or press `Option + Space`, and the shelf
+comes down.
 
-## 다운로드
+1.9 MB on disk, 100 MB resident. No Dock icon — it lives in the menu bar only.
 
-**[Workspace Shelf 0.1.0 내려받기 (dmg)](https://github.com/kimhung910924/workspace-shelf/releases/latest)**
+- Register folders once and open them straight from the shelf
+- Browse inside a registered folder without escaping its root
+- Open files, reveal in Finder, open the folder in Terminal, copy the path
+- Drag files out to Finder or any other app
 
-- macOS 14 Sonoma 이상
-- Apple 공증을 마쳤다. 경고 없이 열린다
-- dmg를 열고 Workspace Shelf를 `응용 프로그램`으로 끌어다 놓는다
+## Download
 
-## 문의
+**[Get Workspace Shelf 0.1.0 (dmg)](https://github.com/kimhung910924/workspace-shelf/releases/latest)**
+
+- macOS 14 Sonoma or later
+- Notarized by Apple, so it opens without a Gatekeeper warning
+- Open the dmg and drag Workspace Shelf to `Applications`
+
+## Contact
 
 [rrllab.com](https://rrllab.com) · contact@rrllab.com
 
 ---
 
-기획서: [WORKSPACE-SHELF-기획서.md](WORKSPACE-SHELF-기획서.md) · 구현 계약: `docs/PRODUCT-SPEC.md`
+## Scope
 
-## 개발
+This repository holds the Phase 1 working slice, not the finished MVP. What is implemented
+and what is deferred is spelled out in `docs/DEVELOPMENT-PLAN.md`; the implementation
+contract is `docs/PRODUCT-SPEC.md`. The original planning document is
+[WORKSPACE-SHELF-기획서.md](WORKSPACE-SHELF-기획서.md) (Korean).
 
-### 요구 사항
+Registered folders are remembered with security-scoped bookmarks, so access survives
+relaunch without asking again.
 
-- macOS 14 이상
-- Xcode 16 이상
+## Requirements to build
+
+- macOS 14 or later
+- Xcode 16 or later
 - Swift 6
 
-### 개발 중 실행
+## Run during development
 
 ```bash
 swift run WorkspaceShelf
 ```
 
-Dock 아이콘 없이 메뉴바 액세서리로 돈다.
+It runs as a menu bar accessory and shows no Dock icon.
 
-### 테스트와 빌드
+## Test and build
 
 ```bash
 swift test
 swift build
 ```
 
-### 로컬 `.app` 만들기
+## Build a local `.app`
 
 ```bash
 ./scripts/build-app.sh debug
 open ".build/app/Workspace Shelf.app"
 ```
 
-`.build/app/Workspace Shelf.app`에 나온다. `/Applications`로 복사하지는 않는다.
+The bundle lands at `.build/app/Workspace Shelf.app`. It is not copied to `/Applications`
+for you.
 
-### 배포본 만들기
+### Ship a release
 
 ```bash
-./scripts/release.sh            # 서명·공증·dmg
-./scripts/release.sh --publish  # GitHub 릴리즈 업로드까지
+./scripts/release.sh            # Developer ID signing, notarization, dmg
+./scripts/release.sh --publish  # and upload to GitHub Releases
 ```
-
-### 현재 범위
-
-Phase 1 동작 조각까지다. MVP 전체가 아니다.
-구현·보류 범위는 `docs/DEVELOPMENT-PLAN.md`에 있다.
