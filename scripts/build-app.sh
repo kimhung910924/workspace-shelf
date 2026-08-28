@@ -36,7 +36,9 @@ fi
 
 mkdir -p "$macos_directory"
 cp "$binary_path" "${macos_directory}/WorkspaceShelf"
+mkdir -p "${contents_directory}/Resources"
 cp "${project_directory}/Resources/Info.plist" "${contents_directory}/Info.plist"
+cp "${project_directory}/Resources/AppIcon.icns" "${contents_directory}/Resources/AppIcon.icns"
 
 if command -v codesign >/dev/null 2>&1; then
   codesign --force --sign - "$application_directory"
